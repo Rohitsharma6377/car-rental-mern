@@ -17,7 +17,10 @@ export const forgetSchema = joi.object({
 })
 
 export const resetSchema = joi.object({
-password: joi.string().min(6).required(),
+    newPassword: joi.string().min(6).required(),
+})
+export const emailOnlySchema = joi.object({
+    email: joi.string().email().required(),
 })
 export const otpSchema = joi.object({
     email: joi.string().email().required(),

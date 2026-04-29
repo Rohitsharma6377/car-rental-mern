@@ -14,6 +14,7 @@ export class authServices {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255),
         email VARCHAR(255) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
         role VARCHAR(50) DEFAULT 'user',
@@ -111,7 +112,7 @@ if (!user) {
     throw new ApiError(400, "No data received");
   }
 
-  const { email, password } = data;
+  const { name, email, password } = data;
 
   console.log("🔥 STEP 2 - email:", email);
   console.log("🔥 STEP 3 - password:", password);
@@ -143,8 +144,8 @@ if (!user) {
   }
 
   const [result] = await pool.query(
-    "INSERT INTO users (email, password, role) VALUES (?, ?, ?)",
-    [email, hashedPassword, role]
+    "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
+    [name, email, hashedPassword, role]
   );
 
   console.log("✅ STEP 7 - user inserted:", result);
