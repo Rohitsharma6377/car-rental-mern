@@ -30,7 +30,7 @@ router.get("/:id", getCategory);
 router.put(
   "/:id",
   fileUpload.single("image"),
-  // authorizeRoles("admin"),
+  // authorizeRoles("admin"), 
   updateCategory
 );
 
